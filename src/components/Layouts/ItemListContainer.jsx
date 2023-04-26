@@ -15,7 +15,7 @@ export const ItemDropdownContainer = ({ page }) => {
     <li className="nav-item dropdown">
       <button
         type="button"
-        class="nav-link dropdown-toggle border-0 bg-transparent"
+        class="nav-link dropdown-toggle"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >

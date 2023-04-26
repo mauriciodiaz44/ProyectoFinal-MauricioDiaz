@@ -8,7 +8,7 @@ const SearchBar = () => {
         e.preventDefault();
       }}
       role="search"
-      className="search-box me-3"
+      className="search-box me-2"
     >
       <input id="search" type="search" placeholder="Buscar productos" />
       <button type="submit" className="search-button">
