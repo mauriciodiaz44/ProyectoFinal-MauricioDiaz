@@ -23,7 +23,7 @@ const UserWidget = () => {
           </a>
         </li>
         <li>
-          <hr class="dropdown-divider my-1" />
+          <hr className="dropdown-divider my-1" />
         </li>
         <li>
           <a className="dropdown-item" href="/">
