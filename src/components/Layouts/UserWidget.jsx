@@ -1,17 +1,14 @@
 import React from "react";
-import {
-  HiOutlineUser,
-  HiArrowLeftOnRectangle,
-  HiOutlineUserCircle,
-} from "react-icons/hi2";
+import { HiOutlineUser, HiArrowRightOnRectangle } from "react-icons/hi2";
 
 const UserWidget = () => {
   return (
     <div className="user-widget dropdown-center">
       <button
-        className="button-icon"
         type="button"
+        className="button-icon"
         data-bs-toggle="dropdown"
+        data-bs-display="static"
         aria-expanded="false"
       >
         <HiOutlineUser />
@@ -19,15 +16,15 @@ const UserWidget = () => {
       <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
         <li>
           <a className="dropdown-item" href="/">
-            <HiOutlineUserCircle className="mb2" /> Mi cuenta
+            <HiArrowRightOnRectangle /> Registrarse
           </a>
         </li>
         <li>
-          <hr className="dropdown-divider my-1" />
+          <hr className="dropdown-divider" />
         </li>
         <li>
           <a className="dropdown-item" href="/">
-            <HiArrowLeftOnRectangle className="mb2" /> Cerrar sesion
+            <HiArrowRightOnRectangle /> Iniciar sesión
           </a>
         </li>
       </ul>

@@ -1,11 +1,11 @@
 import Header from "./components/Layouts/Header";
-import Home from "./pages/Home";
+import Productos from "./pages/Productos";
 
 function App() {
   return (
     <>
       <Header />
-      <Home />
+      <Productos />
     </>
   );
 }

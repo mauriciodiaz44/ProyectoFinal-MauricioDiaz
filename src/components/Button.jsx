@@ -21,14 +21,15 @@ const ButtonComponent = styled.button`
   padding: ${(props) => (props.variant === "terciary" ? 0 : "0.25rem 0.75rem")};
   position: relative;
   transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  text-transform: uppercase;
+  text-transform: ${(props) =>
+    props.variant === "terciary" ? "none" : "uppercase"};
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
   white-space: nowrap;
   word-wrap: break-word;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out;
   &:hover {
     background-color: ${(props) =>
       props.variant === "primary"
