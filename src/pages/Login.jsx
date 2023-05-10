@@ -3,6 +3,7 @@ import { HiOutlineLockClosed, HiOutlineEnvelope } from "react-icons/hi2";
 import { FcGoogle } from "react-icons/fc";
 import usePasswordToggle from "../hooks/usePasswordToggle";
 import Button from "../components/Button";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [PasswordInputType, ToggleIcon] = usePasswordToggle();
@@ -53,9 +54,9 @@ const Login = () => {
                 </label>
               </div>
               <div className="form__group-forgot">
-                <a href="/" className="form__group-forgotPass">
+                <Link to="/" className="form__group-forgotPass">
                   ¿Has olvidado tu contraseña?
-                </a>
+                </Link>
               </div>
             </div>
             <Button
@@ -67,9 +68,9 @@ const Login = () => {
             <div className="form__footer">
               <span className="form__footer-text">
                 ¿No tienes una cuenta?{" "}
-                <a href="/" className="form__group-switch">
+                <Link to="/signup" className="form__group-switch">
                   <Button variant="terciary" text="Regístrate" />
-                </a>
+                </Link>
               </span>
             </div>
           </form>

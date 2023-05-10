@@ -7,6 +7,7 @@ import {
   HiOutlineEnvelope,
 } from "react-icons/hi2";
 import usePasswordToggle from "../hooks/usePasswordToggle";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [PasswordInputType, ToggleIcon] = usePasswordToggle();
@@ -102,9 +103,9 @@ const SignUp = () => {
             <div className="form__footer">
               <span className="form__footer-text">
                 ¿Ya tienes una cuenta?{" "}
-                <a href="/" className="form__group-switch">
+                <Link to="/login" className="form__group-switch">
                   <Button variant="terciary" text="Iniciá tu sesion" />
-                </a>
+                </Link>
               </span>
             </div>
           </form>

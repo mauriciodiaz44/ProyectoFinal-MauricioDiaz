@@ -1,5 +1,6 @@
 import React from "react";
 import { MenuData } from "../../data/MenuData";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -10,10 +11,10 @@ const NavBar = () => {
             {MenuData.map((p, index) => {
               return (
                 <li className="navbar__item" key={index}>
-                  <a className="navbar__link" href={p.path}>
+                  <NavLink className="navbar__link" to={p.path}>
                     <span className="navbar__link-icon">{p.icon}</span>{" "}
                     {p.title}
-                  </a>
+                  </NavLink>
                 </li>
               );
             })}

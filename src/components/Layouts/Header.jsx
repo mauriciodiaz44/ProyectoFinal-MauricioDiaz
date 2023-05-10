@@ -7,6 +7,7 @@ import { RiMenu3Fill } from "react-icons/ri";
 import SearchBar from "./SearchBar";
 import Offcanvas from "../Offcanvas";
 import { MenuData } from "../../data/MenuData";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -31,9 +32,9 @@ const Header = () => {
                 >
                   <RiMenu3Fill />
                 </button>
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" to="/">
                   <img src={Logo} alt="logo" width={150} />
-                </a>
+                </Link>
               </div>
               <SearchBar />
               <div className="header__right">
@@ -50,15 +51,15 @@ const Header = () => {
         onClose={handleCloseOffcanvas}
         title="Menú"
       >
-        <div className="off__canvas-main">
+        <div className="off__canvas-main p-0">
           <ul className="navbar-nav justify-content-end flex-grow-1">
             {MenuData.map((p, index) => {
               return (
                 <li className="offcanvas__item" key={index}>
-                  <a className="offcanvas__link" href={p.path}>
+                  <NavLink className="offcanvas__link" to={p.path}>
                     <span className="offcanvas__link-icon">{p.icon}</span>{" "}
                     {p.title}
-                  </a>
+                  </NavLink>
                 </li>
               );
             })}

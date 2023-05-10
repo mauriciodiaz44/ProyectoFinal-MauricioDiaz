@@ -1,5 +1,6 @@
 import React from "react";
 import { HiOutlineUser, HiArrowRightOnRectangle } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 const UserWidget = () => {
   return (
@@ -15,17 +16,17 @@ const UserWidget = () => {
       </button>
       <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
         <li>
-          <a className="dropdown-item" href="/">
+          <Link className="dropdown-item" to="/signup">
             <HiArrowRightOnRectangle /> Registrarse
-          </a>
+          </Link>
         </li>
         <li>
           <hr className="dropdown-divider" />
         </li>
         <li>
-          <a className="dropdown-item" href="/">
+          <Link className="dropdown-item" to="/login">
             <HiArrowRightOnRectangle /> Iniciar sesión
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
