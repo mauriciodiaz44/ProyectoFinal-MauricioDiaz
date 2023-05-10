@@ -214,7 +214,6 @@ p {
 
 .off__canvas .offcanvas__link {
   display: block;
-  font-size: 1.1rem;
   font-weight: 500;
   color: var(--primary);
   padding: 10px;
@@ -580,6 +579,15 @@ p {
     text-decoration: none;
     transition: all 0.3s ease;
   }
+  .navbar__dropdown {
+    background: transparent;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-right: none;
+    border-left: none;
+  }
+  .navbar__dropdown:before {
+  }
   .navbar__link:hover,
   .navbar__link:focus,
   .navbar__link.dropdown-toggle:hover,
@@ -596,9 +604,6 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  .sorting__right {
-    gap: 8px;
   }
   .button-view {
     padding: 3px;

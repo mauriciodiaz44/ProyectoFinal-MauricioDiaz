@@ -4,9 +4,8 @@ import NavBar from "./NavBar";
 import CartWidget from "./CartWidget";
 import UserWidget from "./UserWidget";
 import { RiMenu3Fill } from "react-icons/ri";
-import SearchBar from "./SearchBar";
 import Offcanvas from "../Offcanvas";
-import { MenuData } from "../../data/MenuData";
+import { CategoriesData } from "../../data/CategoriesData";
 import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
@@ -36,7 +35,6 @@ const Header = () => {
                   <img src={Logo} alt="logo" width={150} />
                 </Link>
               </div>
-              <SearchBar />
               <div className="header__right">
                 <UserWidget />
                 <CartWidget />
@@ -53,7 +51,7 @@ const Header = () => {
       >
         <div className="off__canvas-main p-0">
           <ul className="navbar-nav justify-content-end flex-grow-1">
-            {MenuData.map((p, index) => {
+            {CategoriesData.map((p, index) => {
               return (
                 <li className="offcanvas__item" key={index}>
                   <NavLink className="offcanvas__link" to={p.path}>

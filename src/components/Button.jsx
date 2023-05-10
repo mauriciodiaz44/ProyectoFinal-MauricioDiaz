@@ -21,8 +21,6 @@ const ButtonComponent = styled.button`
   padding: ${(props) => (props.variant === "terciary" ? 0 : "0.25rem 0.75rem")};
   position: relative;
   transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  text-transform: ${(props) =>
-    props.variant === "terciary" ? "none" : "uppercase"};
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;

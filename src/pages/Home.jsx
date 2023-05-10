@@ -1,13 +1,21 @@
 import React from "react";
-import Button from "../components/Button";
+import Filters from "../components/Products/Filters";
+import Sorting from "../components/Products/Sorting";
+import ListProducts from "../components/Products/ListProducts";
 
 const Home = () => {
   return (
-    <div className="py-4">
+    <div className="product__page">
       <div className="container">
-        <Button variant="primary" className="me-3" text="Boton Primario" />
-        <Button variant="secondary" className="me-3" text="Boton Secundario" />
-        <Button variant="terciary" className="me-3" text="Boton Terciario" />
+        <div className="row">
+          <div className="col-12 col-lg-3">
+            <Filters />
+          </div>
+          <div className="col-12 col-lg-9">
+            <Sorting />
+            <ListProducts />
+          </div>
+        </div>
       </div>
     </div>
   );
