@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import Logo from "../../assets/images/logo.png";
 import NavBar from "./NavBar";
-import CartWidget from "./CartWidget";
-import UserWidget from "./UserWidget";
+import CartWidget from "../CartWidget";
+import UserWidget from "../UserWidget";
 import { RiMenu3Fill } from "react-icons/ri";
-import Offcanvas from "../Offcanvas";
+import Offcanvas from "./Offcanvas";
 import { CategoriesData } from "../../data/CategoriesData";
 import { Link, NavLink } from "react-router-dom";
+import {
+  HiOutlineChevronDown,
+  HiOutlineCpuChip,
+  HiOutlineEnvelope,
+  HiOutlineHome,
+  HiOutlineQuestionMarkCircle,
+} from "react-icons/hi2";
 
 const Header = () => {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -35,6 +42,7 @@ const Header = () => {
                   <img src={Logo} alt="logo" width={150} />
                 </Link>
               </div>
+              <NavBar />
               <div className="header__right">
                 <UserWidget />
                 <CartWidget />
@@ -42,7 +50,6 @@ const Header = () => {
             </div>
           </div>
         </nav>
-        <NavBar />
       </header>
       <Offcanvas
         isOpen={isOffcanvasOpen}
@@ -51,16 +58,58 @@ const Header = () => {
       >
         <div className="off__canvas-main p-0">
           <ul className="navbar-nav justify-content-end flex-grow-1">
-            {CategoriesData.map((p, index) => {
-              return (
-                <li className="offcanvas__item" key={index}>
-                  <NavLink className="offcanvas__link" to={p.path}>
-                    <span className="offcanvas__link-icon">{p.icon}</span>{" "}
-                    {p.title}
-                  </NavLink>
+            <li className="offcanvas__item">
+              <NavLink className="offcanvas__link" to="/">
+                <span className="offcanvas__link-icon">
+                  <HiOutlineHome />
+                </span>{" "}
+                Inicio
+              </NavLink>
+            </li>
+            <li className="offcanvas__item">
+              <button
+                type="button"
+                class="offcanvas__link navbar__dropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span className="offcanvas__link-icon">
+                  <HiOutlineCpuChip />
+                </span>{" "}
+                Productos <HiOutlineChevronDown className="dropdown-arrow" />
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <Link to="/" className="dropdown-item">
+                    Todos los productos
+                  </Link>
                 </li>
-              );
-            })}
+                <hr className="dropdown-divider" />
+                {CategoriesData.map((c, index) => (
+                  <li key={index}>
+                    <Link to={c.path} className="dropdown-item">
+                      {c.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <li className="offcanvas__item">
+              <NavLink className="offcanvas__link" to="/contacto">
+                <span className="offcanvas__link-icon">
+                  <HiOutlineEnvelope />
+                </span>{" "}
+                Contacto
+              </NavLink>
+            </li>
+            <li className="offcanvas__item">
+              <NavLink className="offcanvas__link" to="/ayuda">
+                <span className="offcanvas__link-icon">
+                  <HiOutlineQuestionMarkCircle />
+                </span>{" "}
+                Ayuda
+              </NavLink>
+            </li>
           </ul>
         </div>
       </Offcanvas>

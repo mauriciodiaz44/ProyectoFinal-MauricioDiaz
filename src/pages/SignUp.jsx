@@ -13,7 +13,7 @@ const SignUp = () => {
   const [PasswordInputType, ToggleIcon] = usePasswordToggle();
 
   return (
-    <div className="form__page">
+    <section className="form__page">
       <div className="container">
         <div className="form__container">
           <div className="form__header">
@@ -111,7 +111,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

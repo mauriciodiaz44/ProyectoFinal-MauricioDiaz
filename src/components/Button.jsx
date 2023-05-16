@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+// Boton que cambia dependiendo de la prop variant
+
 const ButtonComponent = styled.button`
   appearance: none;
   background-color: ${(props) =>
@@ -27,7 +29,8 @@ const ButtonComponent = styled.button`
   vertical-align: middle;
   white-space: nowrap;
   word-wrap: break-word;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
   &:hover {
     background-color: ${(props) =>
       props.variant === "primary"
@@ -41,7 +44,8 @@ const ButtonComponent = styled.button`
     transition-duration: 0.1s;
   }
   &:disabled {
-    background-color: transparent;
+    background-color: ${(props) =>
+      props.variant === "primary" ? "#f5f5f5" : "transparent"};
     border-color: #2b228a36;
     color: #959da5;
     cursor: default;
@@ -61,7 +65,7 @@ const ButtonComponent = styled.button`
   }
 `;
 
-const Button = ({ type, variant, className, id, onClick, text }) => {
+const Button = ({ type, variant, className, id, onClick, disabled, text }) => {
   return (
     <ButtonComponent
       type={type ? type : "button"}
@@ -69,6 +73,7 @@ const Button = ({ type, variant, className, id, onClick, text }) => {
       className={className}
       id={id}
       onClick={onClick}
+      disabled={disabled}
     >
       {text}
     </ButtonComponent>

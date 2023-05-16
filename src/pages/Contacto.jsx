@@ -8,7 +8,7 @@ import Button from "../components/Button";
 
 const Contacto = () => {
   return (
-    <div className="contact__page">
+    <section className="contact__page">
       <div className="container">
         <div className="contact__container">
           <h1 className="contact__title">Contacto</h1>
@@ -64,7 +64,7 @@ const Contacto = () => {
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
