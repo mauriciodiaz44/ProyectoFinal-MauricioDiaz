@@ -1,0 +1,17 @@
+.cart__page {
+  text-align: center;
+  padding: var(--espaciado);
+}
+.cart__title {
+  font-size: 1.8rem;
+}
+.cart__subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 992px) {
+  .cart__page {
+    padding: 5rem 0;
+  }
+}

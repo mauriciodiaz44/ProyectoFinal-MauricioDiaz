@@ -1,0 +1,33 @@
+.breadcrumb__page {
+  padding: 0;
+}
+.breadcrumb__menu {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+  padding-top: 1rem;
+  padding-bottom: 10px;
+}
+.breadcrumb__item {
+  display: inline-flex;
+  margin: 0;
+  font-size: 15px;
+}
+.breadcrumb__link,
+.breadcrumb__text {
+  color: var(--primary);
+  text-transform: capitalize;
+  opacity: 0.8;
+}
+.breadcrumb__link:hover {
+  opacity: 1;
+}
+.breadcrumb__text {
+  opacity: 1;
+  color: var(--black);
+}
+.sep {
+  margin: 0 5px;
+}

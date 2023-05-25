@@ -1,0 +1,22 @@
+.contact__page {
+  padding: var(--espaciado);
+}
+.contact__container {
+  width: 100%;
+  background-color: var(--white);
+  padding: 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--boxshadow);
+  margin: auto;
+}
+.contact__title {
+  font-size: 1.8rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 992px) {
+  .contact__container {
+    max-width: 720px;
+  }
+}

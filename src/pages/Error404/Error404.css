@@ -1,0 +1,23 @@
+.error__page {
+  text-align: center;
+  padding: var(--espaciado);
+}
+.error__page h1 {
+  font-size: 6rem;
+}
+.error__page h4 {
+  font-size: 1.6rem;
+}
+.error__page p {
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+.error__page button {
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 992px) {
+  .error__page {
+    padding: 5rem 0;
+  }
+}

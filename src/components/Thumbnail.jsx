@@ -58,7 +58,7 @@ const Thumbnail = ({ item }) => {
               alt={img.url}
               width="500"
               height="500"
-              className="h-100"
+              className="img-fluid"
             />
           </div>
         ))}
