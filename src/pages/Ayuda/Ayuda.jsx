@@ -3,6 +3,7 @@ import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import "./Ayuda.css";
 
 const Ayuda = () => {
+  document.title = "Ayuda - Molecula Componentes";
   const breadCrumbs = [
     { name: "Inicio", path: "/" },
     { name: "Ayuda", path: "/ayuda" },

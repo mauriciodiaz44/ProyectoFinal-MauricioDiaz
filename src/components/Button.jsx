@@ -22,6 +22,8 @@ const ButtonComponent = styled.button`
   display: inline-block;
   padding: ${(props) => (props.variant === "terciary" ? 0 : "0.25rem 0.75rem")};
   position: relative;
+  text-transform: ${(props) =>
+    props.variant === "terciary" ? "none" : "uppercase"};
   transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
   user-select: none;
   -webkit-user-select: none;
@@ -43,13 +45,6 @@ const ButtonComponent = styled.button`
     text-decoration: none;
     transition-duration: 0.1s;
   }
-  &:disabled {
-    background-color: ${(props) =>
-      props.variant === "primary" ? "#f5f5f5" : "transparent"};
-    border-color: #2b228a36;
-    color: #959da5;
-    cursor: default;
-  }
   &:active {
     background-color: ${(props) =>
       props.variant === "primary"
@@ -63,19 +58,40 @@ const ButtonComponent = styled.button`
   &:focus {
     outline: 1px transparent;
   }
+  &:disabled,
+  &:disabled:hover {
+    background-color: ${(props) =>
+      props.variant === "primary" ? "#f5f5f5" : "transparent"};
+    border-color: rgb(43 34 138 / 6%);
+    color: #959da5;
+    cursor: default;
+  }
+  svg {
+    margin-bottom: 2px;
+  }
 `;
 
-const Button = ({ type, variant, className, id, onClick, disabled, text }) => {
+const Button = ({
+  type,
+  variant,
+  className,
+  id,
+  onClick,
+  disabled,
+  icon,
+  text,
+}) => {
   return (
     <ButtonComponent
       type={type ? type : "button"}
       variant={variant}
       className={className}
       id={id}
+      icon={icon}
       onClick={onClick}
       disabled={disabled}
     >
-      {text}
+      {icon} {text}
     </ButtonComponent>
   );
 };

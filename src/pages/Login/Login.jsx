@@ -7,12 +7,13 @@ import { Link } from "react-router-dom";
 import "../../assets/css/Form.css";
 
 const Login = () => {
+  document.title = "Login - Molecula Componentes";
   const [PasswordInputType, ToggleIcon] = usePasswordToggle();
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
+  document.title = "Login - Molecula Componentes";
   return (
     <section className="form__page">
       <div className="container">

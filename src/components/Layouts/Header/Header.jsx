@@ -70,7 +70,7 @@ const Header = () => {
             <li className="offcanvas__item">
               <button
                 type="button"
-                class="offcanvas__link navbar__dropdown"
+                className="offcanvas__link navbar__dropdown"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -79,7 +79,7 @@ const Header = () => {
                 </span>{" "}
                 Productos <HiOutlineChevronDown className="dropdown-arrow" />
               </button>
-              <ul class="dropdown-menu">
+              <ul className="dropdown-menu">
                 <li>
                   <Link to="/" className="dropdown-item">
                     Todos los productos

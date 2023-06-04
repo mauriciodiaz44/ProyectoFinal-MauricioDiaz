@@ -10,7 +10,7 @@ import Ayuda from "./pages/Ayuda/Ayuda";
 import Carrito from "./pages/Carrito/Carrito";
 import Checkout from "./pages/Checkout/Checkout";
 import Error404 from "./pages/Error404/Error404";
-import CartContextProvider from "./context/cartContext";
+import { CartContextProvider } from "./context/cartContext";
 
 function App() {
   return (

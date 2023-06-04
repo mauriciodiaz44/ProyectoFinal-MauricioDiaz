@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Error404.css";
 
 const Error404 = () => {
+  document.title = "Error 404 - Pagina no encontrada";
   return (
     <div className="error__page">
       <div className="container">

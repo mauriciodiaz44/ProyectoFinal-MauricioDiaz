@@ -26,7 +26,7 @@ const NavBar = () => {
           <li className="navbar__item">
             <button
               type="button"
-              class="navbar__link navbar__dropdown"
+              className="navbar__link navbar__dropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
@@ -35,7 +35,7 @@ const NavBar = () => {
               </span>{" "}
               Productos <HiOutlineChevronDown className="dropdown-arrow" />
             </button>
-            <ul class="dropdown-menu">
+            <ul className="dropdown-menu">
               <li>
                 <Link to="/" className="dropdown-item">
                   Todos los productos

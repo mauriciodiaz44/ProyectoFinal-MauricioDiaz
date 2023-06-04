@@ -1,14 +1,27 @@
 import React from "react";
+import useCartContext from "../../context/cartContext";
 import { Link } from "react-router-dom";
-import { HiOutlineCheckCircle, HiOutlineXCircle } from "react-icons/hi2";
+import {
+  HiOutlineShoppingBag,
+  HiOutlineCheckCircle,
+  HiOutlineXCircle,
+} from "react-icons/hi2";
 import FormatPrice from "../FormatPrice";
 import Button from "../Button";
 import "./Item.css";
 
 const Item = ({ item }) => {
+  const { getQuantityById } = useCartContext();
+  const quantityPerItem = getQuantityById(item.id);
   return (
     <div className="product">
       {item.featured === true && <div className="product__new">Nuevo</div>}
+      {quantityPerItem > 0 && (
+        <div className="product__cart">
+          <HiOutlineShoppingBag />
+          <span className="product__cart-qty">{quantityPerItem}</span>
+        </div>
+      )}
       <div className="product__image">
         <Link to={`/item/${item.id}`} className="product__image-link">
           <img src={item.images[0].url} alt={item.title} />
@@ -31,16 +44,10 @@ const Item = ({ item }) => {
           </span>
         </div>
         <div className="product__content-buttons">
-          <Button
-            variant="primary"
-            text="Añadir al carrito"
-            className="product__content-addcart"
-            disabled={item.stock > 0 ? false : true}
-          />
           <Link to={`/item/${item.id}`}>
             <Button
               variant="secondary"
-              text="Ver detalles"
+              text="Ver mas detalles"
               className="product__content-detail"
             />
           </Link>

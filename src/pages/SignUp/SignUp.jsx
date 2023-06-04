@@ -16,7 +16,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
+  document.title = "Registro - Molecula Componentes";
   return (
     <section className="form__page">
       <div className="container">

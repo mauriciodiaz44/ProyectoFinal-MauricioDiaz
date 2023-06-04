@@ -10,7 +10,6 @@
 }
 .error__page p {
   margin-bottom: 8px;
-  color: var(--muted);
 }
 .error__page button {
   text-transform: uppercase;

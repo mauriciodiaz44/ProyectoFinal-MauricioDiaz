@@ -12,6 +12,7 @@
   color: var(--primary);
   font-size: 20px;
   padding: 0 5px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 .itemcount__minus svg,
 .itemcount__plus svg {
@@ -26,4 +27,11 @@
   border-right: 1px solid var(--background2);
   line-height: 30px;
   text-align: center;
+}
+
+.itemcount.disabled button,
+.itemcount button[disabled] {
+  background-color: var(--background2);
+  color: var(--muted);
+  cursor: not-allowed;
 }

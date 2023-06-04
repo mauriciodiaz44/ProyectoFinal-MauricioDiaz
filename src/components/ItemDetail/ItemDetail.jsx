@@ -18,14 +18,22 @@ import { Link } from "react-router-dom";
 import Ahora12 from "../../assets/images/LogoAhora12.svg";
 import Button from "../Button";
 import ItemCount from "../ItemCount/ItemCount";
+import useCartContext from "../../context/cartContext";
 import "./ItemDetail.css";
 
 const ItemDetail = ({ item }) => {
+  const { addToCart } = useCartContext();
+
+  const onAdd = (count) => {
+    addToCart(item, count);
+  };
+
   const breadCrumbs = [
     { name: "Inicio", path: "/" },
     { name: `${item.title.substring(0, 35)} ...`, path: `/item/${item.id}` },
   ];
 
+  document.title = `${item.title} - Molecula Componentes`;
   return (
     <>
       <BreadCrumbs breadCrumbs={breadCrumbs} />
@@ -121,13 +129,7 @@ const ItemDetail = ({ item }) => {
                 </div>
                 <hr />
                 <div className="details__buttons">
-                  <ItemCount initial={1} />
-                  <Button
-                    variant="primary"
-                    text="Añadir al carrito"
-                    className="details__buttons-addcart"
-                    disabled={item.stock > 0 ? false : true}
-                  />
+                  <ItemCount stock={item.stock} initial={1} onAdd={onAdd} />
                 </div>
                 <hr />
                 <div className="details__info">

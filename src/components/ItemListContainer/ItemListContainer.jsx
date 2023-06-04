@@ -20,9 +20,13 @@ const ItemListContainer = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       if (categoryid === undefined) {
+        document.title = "Molecula Componentes";
         setProducts(productsData);
         setLoading(false);
       } else {
+        document.title = `${
+          categoryid[0].toUpperCase() + categoryid.substring(1)
+        } - Molecula Componentes`;
         // Filtramos los productos por la categoría actual
         const filteredProducts = productsData.filter(
           (product) => product.category === categoryid
@@ -52,7 +56,6 @@ const ItemListContainer = () => {
       <BreadCrumbs breadCrumbs={breadCrumbs} />
       <section className="products__page">
         <div className="container">
-          <div className="products__banner"></div>
           <div className="row">
             <div className="col-12 col-lg-3">
               <Aside />

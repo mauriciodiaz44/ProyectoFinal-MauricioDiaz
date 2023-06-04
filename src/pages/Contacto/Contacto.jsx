@@ -11,7 +11,7 @@ const Contacto = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
+  document.title = "Contacto - Molecula Componentes";
   return (
     <section className="contact__page">
       <div className="container">
