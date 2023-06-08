@@ -1,14 +1,33 @@
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import {
-  getFirestore,
+  collection,
   doc,
   getDoc,
-  collection,
   getDocs,
+  getFirestore,
+  query,
+  where,
 } from "firebase/firestore";
 
-const db = getFirestore();
+const firebaseConfig = {
+  apiKey: "AIzaSyDFFrMTIyo1DmdCkffnLPE_9LlXdwWSieI",
+  authDomain: "mauriciodiaz-43190.firebaseapp.com",
+  projectId: "mauriciodiaz-43190",
+  storageBucket: "mauriciodiaz-43190.appspot.com",
+  messagingSenderId: "731153267144",
+  appId: "1:731153267144:web:997a712fb8dd6ff47ca8fd",
+};
 
-export async function getAllItems() {
+// Inicializa Firebase
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+
+// Obtén una referencia a la colección 'productos'
+const db = getFirestore(app);
+export default db;
+
+export const fetchAllProducts = async () => {
   const miColec = collection(db, "products");
   const itemsSnapshot = await getDocs(miColec);
 
@@ -18,15 +37,32 @@ export async function getAllItems() {
       id: doc.id,
     };
   });
-}
+};
 
-export async function getItem(id) {
+export const fetchCategory = async (categoryId) => {
   const miColec = collection(db, "products");
-  const itemRef = doc(miColec, id);
-  const itemSnapshot = await getDoc(itemRef);
+  const queryItem = query(miColec, where("category", "==", categoryId));
+  const itemSnapshot = await getDocs(queryItem);
 
-  return {
-    ...itemSnapshot.data(),
-    id: itemSnapshot.id,
-  };
-}
+  return itemSnapshot.docs.map((doc) => {
+    return {
+      ...doc.data(),
+      id: doc.id,
+    };
+  });
+};
+
+export const fetchProduct = async (productId) => {
+  try {
+    const productRef = doc(db, "products", productId);
+    const productSnapshot = await getDoc(productRef);
+
+    if (productSnapshot.exists()) {
+      return productSnapshot.data();
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return null;
+  }
+};

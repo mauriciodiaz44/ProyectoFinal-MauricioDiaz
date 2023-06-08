@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import productsData from "../../data/productsData";
 import ItemList from "../ItemList/ItemList";
 import Aside from "../Aside/Aside";
 import Loading from "../Loading/Loading";
 import BreadCrumbs from "../BreadCrumbs/BreadCrumbs";
 import "./ItemListContainer.css";
+import { fetchAllProducts, fetchCategory } from "../../data/FireStore";
 
 const ItemListContainer = () => {
   const { categoryid } = useParams();
@@ -13,31 +13,23 @@ const ItemListContainer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulación de una solicitud asíncrona para obtener los productos de la categoría
-    const fetchProducts = async () => {
-      setLoading(true);
-      // Simulación de una demora de 2 segundo
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+    if (categoryid === undefined) {
+      document.title = "Molecula Componentes";
 
-      if (categoryid === undefined) {
-        document.title = "Molecula Componentes";
-        setProducts(productsData);
+      fetchAllProducts().then((res) => {
+        setProducts(res);
         setLoading(false);
-      } else {
-        document.title = `${
-          categoryid[0].toUpperCase() + categoryid.substring(1)
-        } - Molecula Componentes`;
-        // Filtramos los productos por la categoría actual
-        const filteredProducts = productsData.filter(
-          (product) => product.category === categoryid
-        );
-        // Guarda los productos filtrados a la array products
-        setProducts(filteredProducts);
-        setLoading(false);
-      }
-    };
+      });
+    } else {
+      document.title = `${
+        categoryid[0].toUpperCase() + categoryid.substring(1)
+      } - Molecula Componentes`;
 
-    fetchProducts();
+      fetchCategory(categoryid).then((res) => {
+        setProducts(res);
+        setLoading(false);
+      });
+    }
   }, [categoryid]);
 
   if (loading) {

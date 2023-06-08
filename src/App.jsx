@@ -11,29 +11,43 @@ import Carrito from "./pages/Carrito/Carrito";
 import Checkout from "./pages/Checkout/Checkout";
 import Error404 from "./pages/Error404/Error404";
 import { CartContextProvider } from "./context/cartContext";
+import { AuthProvider } from "./context/authContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <CartContextProvider>
-      <BrowserRouter>
-        <Header />
-        <main>
-          <Routes>
-            <Route exact path="/" Component={ItemListContainer} />
-            <Route path="/category/:categoryid" Component={ItemListContainer} />
-            <Route path="/item/:itemid" Component={ItemDetailContainer} />
-            <Route path="/signup" Component={SignUp} />
-            <Route path="/login" Component={Login} />
-            <Route path="/contacto" Component={Contacto} />
-            <Route path="/ayuda" Component={Ayuda} />
-            <Route path="/cart" Component={Carrito} />
-            <Route path="/checkout" Component={Checkout} />
-            <Route path="*" Component={Error404} />
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
-    </CartContextProvider>
+    <AuthProvider>
+      <CartContextProvider>
+        <BrowserRouter>
+          <Header />
+          <main>
+            <Routes>
+              <Route exact path="/" Component={ItemListContainer} />
+              <Route
+                path="/category/:categoryid"
+                Component={ItemListContainer}
+              />
+              <Route path="/item/:itemid" Component={ItemDetailContainer} />
+              <Route path="/signup" Component={SignUp} />
+              <Route path="/login" Component={Login} />
+              <Route path="/contacto" Component={Contacto} />
+              <Route path="/ayuda" Component={Ayuda} />
+              <Route path="/cart" Component={Carrito} />
+              <Route
+                path="/checkout"
+                element={
+                  <ProtectedRoute>
+                    <Checkout />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" Component={Error404} />
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </CartContextProvider>
+    </AuthProvider>
   );
 }
 

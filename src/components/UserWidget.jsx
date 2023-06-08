@@ -1,8 +1,51 @@
 import React from "react";
-import { HiOutlineUser, HiArrowRightOnRectangle } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import {
+  HiOutlineUser,
+  HiOutlineUserCircle,
+  HiOutlineArrowLeftOnRectangle,
+  HiOutlineArrowRightOnRectangle,
+} from "react-icons/hi2";
+import avatar from "../assets/images/avatar-default.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 const UserWidget = () => {
+  const { user, logout, loading } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
+
+  const loggedIn = () => {
+    return (
+      <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+        <li>
+          <Link className="dropdown-item" to="/signup">
+            <HiOutlineUserCircle /> Mi perfil
+          </Link>
+        </li>
+        <li>
+          <hr className="dropdown-divider" />
+        </li>
+        <li>
+          <button className="dropdown-item" to="/login" onClick={handleLogout}>
+            <HiOutlineArrowLeftOnRectangle /> Cerrar sesión
+          </button>
+        </li>
+      </ul>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    );
+  }
+
   return (
     <div className="user-widget dropdown-center">
       <button
@@ -12,23 +55,37 @@ const UserWidget = () => {
         data-bs-display="static"
         aria-expanded="false"
       >
-        <HiOutlineUser />
+        {user === null ? (
+          <HiOutlineUser />
+        ) : (
+          <img
+            src={user.photoURL === null ? avatar : user.photoURL}
+            alt="avatar"
+            width={28}
+            height={28}
+            className="rounded-circle"
+          />
+        )}
       </button>
-      <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-        <li>
-          <Link className="dropdown-item" to="/signup">
-            <HiArrowRightOnRectangle /> Registrarse
-          </Link>
-        </li>
-        <li>
-          <hr className="dropdown-divider" />
-        </li>
-        <li>
-          <Link className="dropdown-item" to="/login">
-            <HiArrowRightOnRectangle /> Iniciar sesión
-          </Link>
-        </li>
-      </ul>
+      {user === null ? (
+        <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+          <li>
+            <Link className="dropdown-item" to="/signup">
+              <HiOutlineArrowRightOnRectangle /> Registrarse
+            </Link>
+          </li>
+          <li>
+            <hr className="dropdown-divider" />
+          </li>
+          <li>
+            <Link className="dropdown-item" to="/login">
+              <HiOutlineArrowRightOnRectangle /> Iniciar sesión
+            </Link>
+          </li>
+        </ul>
+      ) : (
+        loggedIn()
+      )}
     </div>
   );
 };

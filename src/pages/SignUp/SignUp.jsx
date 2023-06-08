@@ -1,22 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/Button";
 import {
   HiOutlineUser,
   HiOutlineIdentification,
   HiOutlineLockClosed,
   HiOutlineEnvelope,
+  HiOutlineExclamationCircle,
 } from "react-icons/hi2";
 import usePasswordToggle from "../../hooks/usePasswordToggle";
-import { Link } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+import { Link, useNavigate } from "react-router-dom";
 import "../../assets/css/Form.css";
 
 const SignUp = () => {
   const [PasswordInputType, ToggleIcon] = usePasswordToggle();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const { signup } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({ ...user, [name]: value });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await signup(user.email, user.password);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      if (error.code === "auth/invalid-email") {
+        setError("El email ingresado no es valido.");
+      }
+      if (error.code === "auth/missing-email") {
+        setError("El email es un campo obligatorio.");
+      }
+      if (error.code === "auth/missing-password") {
+        setError("La contraseña es un campo obligatorio.");
+      }
+      if (error.code === "auth/weak-password") {
+        setError("La contraseña debe tener al menos 6 caracteres.");
+      }
+      if (error.code === "auth/email-already-in-use") {
+        setError("El email ingresado ya ha sido registrado.");
+      }
+    }
+  };
+
   document.title = "Registro - Molecula Componentes";
+
   return (
     <section className="form__page">
       <div className="container">
@@ -27,6 +64,11 @@ const SignUp = () => {
               Ingresá tu datos para crear una cuenta.
             </p>
           </div>
+          {error && (
+            <p className="form__error">
+              <HiOutlineExclamationCircle /> {error}
+            </p>
+          )}
           <form className="form__signup" onSubmit={handleSubmit}>
             <div className="form__group-two">
               <div className="form__group">
@@ -36,6 +78,7 @@ const SignUp = () => {
                   placeholder="Nombre"
                   name="firstname"
                   id="name"
+                  onChange={handleChange}
                 />
                 <HiOutlineUser className="form__input-icon" />
               </div>
@@ -46,6 +89,7 @@ const SignUp = () => {
                   placeholder="Apellido"
                   name="lastname"
                   id="lastname"
+                  onChange={handleChange}
                 />
                 <HiOutlineIdentification className="form__input-icon" />
               </div>
@@ -53,11 +97,12 @@ const SignUp = () => {
             <div className="form__group">
               <input
                 className="form__input"
-                type="text"
+                type="email"
                 placeholder="Email"
                 name="email"
                 id="email"
                 autoComplete="off"
+                onChange={handleChange}
               />
               <HiOutlineEnvelope className="form__input-icon" />
             </div>
@@ -68,6 +113,7 @@ const SignUp = () => {
                 placeholder="Contraseña"
                 name="password"
                 id="password"
+                onChange={handleChange}
               />
               <HiOutlineLockClosed className="form__input-icon" />
               <span className="form__input-eye">{ToggleIcon}</span>
@@ -79,6 +125,7 @@ const SignUp = () => {
                 placeholder="Confirmar Contraseña"
                 name="password"
                 id="password2"
+                onChange={handleChange}
               />
               <HiOutlineLockClosed className="form__input-icon" />
               <span className="form__input-eye">{ToggleIcon}</span>

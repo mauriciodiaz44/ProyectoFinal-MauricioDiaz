@@ -126,6 +126,7 @@ hr {
 .dropdown-item:hover {
   background-color: var(--background);
   opacity: 1;
+  transition: all 0.3s ease;
 }
 .dropdown-divider {
   margin: 0.25rem 0;

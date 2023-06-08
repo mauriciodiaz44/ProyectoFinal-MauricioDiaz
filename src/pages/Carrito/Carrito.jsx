@@ -3,7 +3,7 @@ import CartEmpty from "./CartEmpty";
 import useCartContext from "../../context/cartContext";
 import FormatPrice from "../../components/FormatPrice";
 import {
-  HiOutlineXMark,
+  HiOutlineXCircle,
   HiOutlineTrash,
   HiOutlineArrowLongLeft,
 } from "react-icons/hi2";
@@ -99,7 +99,7 @@ const Carrito = () => {
                         className="cart__delete"
                         onClick={() => deleteItem(item.id)}
                       >
-                        <HiOutlineXMark />
+                        <HiOutlineXCircle />
                       </button>
                     </td>
                   </tr>
