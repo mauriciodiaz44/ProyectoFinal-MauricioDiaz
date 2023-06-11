@@ -69,6 +69,17 @@ export const fetchProduct = async (productId) => {
   }
 };
 
+export const sendContact = async (contact) => {
+  const buyTimeStamp = Timestamp.now();
+  const orderWithDate = {
+    ...contact,
+    date: buyTimeStamp,
+  };
+  const miColec = collection(db, "contacts");
+  const orderDoc = await addDoc(miColec, orderWithDate);
+  return orderDoc.id;
+};
+
 export const sendOrder = async (order) => {
   const buyTimeStamp = Timestamp.now();
   const orderWithDate = {

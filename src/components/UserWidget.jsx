@@ -72,7 +72,7 @@ const UserWidget = () => {
       {user === null ? (
         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
           <li>
-            <Link className="dropdown-item" to="/signup">
+            <Link className="dropdown-item" to="/">
               <HiOutlineArrowRightOnRectangle /> Registrarse
             </Link>
           </li>

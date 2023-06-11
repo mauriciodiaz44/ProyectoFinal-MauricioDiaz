@@ -12,19 +12,27 @@ export const CartContextProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // Funcion que agrega productos y le agrega cantidad si ya existe, y evita sobrepasar el stock
   const addToCart = (item, qty) => {
     const isItemFound = cart.some((cartItems) => cartItems.id === item.id);
     if (isItemFound) {
       const newCart = cart.map((cartItem) => {
         if (cartItem.id === item.id) {
           const copyItem = { ...cartItem };
-          copyItem.qty += qty;
+          // Verifica si la cantidad solicitada supera el stock disponible
+          const availableQty = item.stock - copyItem.qty;
+          const addedQty = qty > availableQty ? availableQty : qty;
+          copyItem.qty += addedQty;
           return copyItem;
         } else return cartItem;
       });
       setCart(newCart);
     } else {
       const newItem = { ...item, qty: 1 };
+      // Verifica si la cantidad solicitada supera el stock disponible
+      const availableQty = item.stock;
+      const addedQty = qty > availableQty ? availableQty : qty;
+      newItem.qty = addedQty;
       setCart([...cart, newItem]);
     }
   };
@@ -33,10 +41,12 @@ export const CartContextProvider = ({ children }) => {
     return cart.find((item) => item.id === id)?.qty || 0;
   };
 
+  // Elimina todo el carrito
   const removeList = () => {
     setCart([]);
   };
 
+  // Elimina el producto del carrito
   const deleteItem = (id) => {
     setCart((items) => {
       if (items.find((item) => item.id === id)?.qty === 1) {
@@ -53,10 +63,12 @@ export const CartContextProvider = ({ children }) => {
     });
   };
 
+  // Cuenta el total de todos los productos en carrito
   const totalPrice = () => {
     return cart.reduce((acc, el) => acc + el.price * el.qty, 0);
   };
 
+  // Cuenta el total de todos los productos en el carrito
   const totalItems = () => {
     return cart.reduce((acc, el) => acc + el.qty, 0);
   };

@@ -1,25 +1,20 @@
 import React, { useState } from "react";
-import {
-  HiOutlineLockClosed,
-  HiOutlineEnvelope,
-  HiOutlineExclamationCircle,
-} from "react-icons/hi2";
+import { HiOutlineEnvelope, HiOutlineExclamationCircle } from "react-icons/hi2";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../context/authContext";
-import usePasswordToggle from "../../hooks/usePasswordToggle";
 import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
+import PasswordField from "../../components/PasswordField";
 import "../../assets/css/Form.css";
 
 const Login = () => {
   document.title = "Login - Molecula Componentes";
-  const [PasswordInputType, ToggleIcon] = usePasswordToggle();
 
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const { login, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle, resetPassword } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
 
@@ -68,6 +63,18 @@ const Login = () => {
     }
   };
 
+  const handleResetPassword = async () => {
+    if (!user.email) return setError("Por favor, ingrese su email.");
+    try {
+      await resetPassword(user.email);
+      setError(
+        "El link de recuperacion se ha enviado a su correo electronico."
+      );
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   document.title = "Login - Molecula Componentes";
   return (
     <section className="form__page">
@@ -98,16 +105,12 @@ const Login = () => {
               <HiOutlineEnvelope className="form__input-icon" />
             </div>
             <div className="form__group mb-0">
-              <input
-                className="form__input"
-                type={PasswordInputType}
+              <PasswordField
                 placeholder="Contraseña"
                 name="password"
                 id="password"
                 onChange={handleChange}
               />
-              <HiOutlineLockClosed className="form__input-icon" />
-              <span className="form__input-eye">{ToggleIcon}</span>
             </div>
             <div className="form__group-bottom">
               <div className="form__group-remember">
@@ -122,9 +125,13 @@ const Login = () => {
                 </label>
               </div>
               <div className="form__group-forgot">
-                <Link to="/" className="form__group-forgotPass">
+                <span
+                  role="button"
+                  className="form__group-forgotPass"
+                  onClick={handleResetPassword}
+                >
                   ¿Has olvidado tu contraseña?
-                </Link>
+                </span>
               </div>
             </div>
             <Button

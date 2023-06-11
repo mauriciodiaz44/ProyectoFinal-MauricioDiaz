@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import Button from "../../components/Button";
 import {
   HiOutlineIdentification,
-  HiOutlineLockClosed,
   HiOutlineEnvelope,
   HiOutlineExclamationCircle,
 } from "react-icons/hi2";
-import usePasswordToggle from "../../hooks/usePasswordToggle";
+import { regName } from "../../hooks/useValid";
 import { useAuth } from "../../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
+import PasswordField from "../../components/PasswordField";
 import "../../assets/css/Form.css";
 
 const SignUp = () => {
-  const [PasswordInputType, ToggleIcon] = usePasswordToggle();
   const [user, setUser] = useState({
     displayName: "",
     email: "",
@@ -30,10 +29,11 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    console.log(user);
     try {
       if (user.displayName === "") {
         setError("El nombre es un campo obligatorio.");
-      } else if (/^[a-zA-Z]+ [a-zA-Z]+$/.test(user.displayName)) {
+      } else if (regName(user.displayName)) {
         setError("El nombre no es valido, debe ingresar nombre y apellido.");
       } else if (user.password2 !== user.password) {
         setError("La contraseña de verificación no coincide.");
@@ -102,28 +102,20 @@ const SignUp = () => {
               <HiOutlineEnvelope className="form__input-icon" />
             </div>
             <div className="form__group">
-              <input
-                className="form__input"
-                type={PasswordInputType}
+              <PasswordField
                 placeholder="Contraseña"
                 name="password"
                 id="password"
                 onChange={handleChange}
               />
-              <HiOutlineLockClosed className="form__input-icon" />
-              <span className="form__input-eye">{ToggleIcon}</span>
             </div>
             <div className="form__group mb-0">
-              <input
-                className="form__input"
-                type={PasswordInputType}
+              <PasswordField
                 placeholder="Confirmar Contraseña"
                 name="password2"
                 id="password2"
                 onChange={handleChange}
               />
-              <HiOutlineLockClosed className="form__input-icon" />
-              <span className="form__input-eye">{ToggleIcon}</span>
             </div>
             <div className="form__group-bottom">
               <div className="form__group-remember">

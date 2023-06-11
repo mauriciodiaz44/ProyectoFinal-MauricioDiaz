@@ -6,16 +6,22 @@ import {
   HiOutlineMap,
   HiOutlineExclamationCircle,
 } from "react-icons/hi2";
+import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import useCartContext from "../../context/cartContext";
+import {
+  regName,
+  regEmail,
+  regPhoneNumber,
+  regZipCode,
+} from "../../hooks/useValid";
 import CheckoutEmpty from "./CheckoutEmpty";
 import CheckoutOrders from "./CheckoutOrders";
 import CheckoutComplete from "./CheckoutComplete";
 import { sendOrder } from "../../data/FireStore";
 import "./Checkout.css";
 import "../../assets/css/Form.css";
-import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 
 const Checkout = () => {
   const { cart, totalPrice, removeList } = useCartContext();
@@ -66,29 +72,6 @@ const Checkout = () => {
         setSubmitted(true);
         removeList();
       });
-  };
-
-  // Validaciones del formulario
-  const regName = (string) => {
-    //eslint-disable-next-line
-    return /^[a-zA-Z]+ [a-zA-Z]+$/.test(string);
-  };
-
-  const regEmail = (string) => {
-    //eslint-disable-next-line
-    return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-      string
-    );
-  };
-
-  const regPhoneNumber = (number) => {
-    //eslint-disable-next-line
-    return /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/.test(number);
-  };
-
-  const regZipCode = (number) => {
-    //eslint-disable-next-line
-    return /(^[a-z]{1}\d{4}[a-z]{3}$|^\d{4}$)/.test(number);
   };
 
   // Envio de formulario

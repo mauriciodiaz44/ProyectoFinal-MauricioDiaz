@@ -76,11 +76,14 @@
 
 .form__input-eye {
   position: absolute;
+  border: none;
+  background-color: transparent;
   top: 50%;
   transform: translateY(-55%);
   color: var(--muted);
   font-size: 22px;
   right: 10px;
+  line-height: 0;
   transition: all 0.3s ease-in-out;
 }
 
@@ -120,6 +123,11 @@
 }
 .form__error svg {
   margin-bottom: 3px;
+}
+
+.form__sucess {
+  border: 1px solid var(--green);
+  color: var(--green);
 }
 
 .form__media-link {
