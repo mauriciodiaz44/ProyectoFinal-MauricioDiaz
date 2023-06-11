@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CartEmpty from "./CartEmpty";
 import useCartContext from "../../context/cartContext";
 import FormatPrice from "../../components/FormatPrice";
@@ -11,10 +11,20 @@ import "./Carrito.css";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
+import Modal from "../../components/Modal/Modal";
 
 const Carrito = () => {
   const { cart, deleteItem, removeList, totalPrice, totalItems } =
     useCartContext();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   document.title = `Carrito (${totalItems()}) - Molecula Componentes`;
 
@@ -48,8 +58,27 @@ const Carrito = () => {
               variant="terciary"
               icon={<HiOutlineTrash />}
               text="Vaciar carrito"
-              onClick={removeList}
+              onClick={totalItems() > 1 ? openModal : removeList}
             />
+            <Modal
+              isOpen={modalOpen}
+              onClose={closeModal}
+              title="Borrar carrito"
+              icon="alert"
+            >
+              <p>
+                ¿Estás seguro que deseas borrar todos los productos de tu
+                carrito?
+              </p>
+              <div className="d-flex align-items-center gap-2">
+                <Button variant="primary" text="Aceptar" onClick={removeList} />
+                <Button
+                  variant="secondary"
+                  text="Cancelar"
+                  onClick={closeModal}
+                />
+              </div>
+            </Modal>
           </div>
           <div className="cart__container">
             <table>
@@ -77,7 +106,7 @@ const Carrito = () => {
                             to={`/item/${item.id}`}
                             className="cart__info-title "
                           >
-                            {item.title}
+                            {`${item.title.substring(0, 28)} ...`}
                           </Link>
                           <small>
                             Precio: {""}

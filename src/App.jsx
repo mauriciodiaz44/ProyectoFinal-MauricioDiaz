@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CartContextProvider } from "./context/cartContext";
+import { AuthProvider } from "./context/authContext";
 import Header from "./components/Layouts/Header/Header";
 import Footer from "./components/Layouts/Footer/Footer";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
@@ -10,8 +12,6 @@ import Ayuda from "./pages/Ayuda/Ayuda";
 import Carrito from "./pages/Carrito/Carrito";
 import Checkout from "./pages/Checkout/Checkout";
 import Error404 from "./pages/Error404/Error404";
-import { CartContextProvider } from "./context/cartContext";
-import { AuthProvider } from "./context/authContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {

@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
+  Timestamp,
+  addDoc,
   collection,
   doc,
   getDoc,
@@ -65,4 +67,15 @@ export const fetchProduct = async (productId) => {
   } catch (error) {
     return null;
   }
+};
+
+export const sendOrder = async (order) => {
+  const buyTimeStamp = Timestamp.now();
+  const orderWithDate = {
+    ...order,
+    date: buyTimeStamp,
+  };
+  const miColec = collection(db, "orders");
+  const orderDoc = await addDoc(miColec, orderWithDate);
+  return orderDoc.id;
 };

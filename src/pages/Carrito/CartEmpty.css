@@ -1,6 +1,8 @@
 .cart__empty {
   text-align: center;
   padding: var(--espaciado);
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .cart__title {
   font-size: 1.8rem;

@@ -6,6 +6,7 @@ import Loading from "../Loading/Loading";
 import BreadCrumbs from "../BreadCrumbs/BreadCrumbs";
 import "./ItemListContainer.css";
 import { fetchAllProducts, fetchCategory } from "../../data/FireStore";
+import Error404 from "../../pages/Error404/Error404";
 
 const ItemListContainer = () => {
   const { categoryid } = useParams();
@@ -42,6 +43,11 @@ const ItemListContainer = () => {
       ? ""
       : { name: categoryid, path: `/category/${categoryid}` },
   ];
+
+  // Si no hay ningun producto significa que no existe tal categoria
+  if (products.length === 0) {
+    return <Error404 />;
+  }
 
   return (
     <>

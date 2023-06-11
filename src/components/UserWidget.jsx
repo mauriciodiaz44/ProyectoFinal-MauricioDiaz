@@ -18,6 +18,7 @@ const UserWidget = () => {
     navigate("/login");
   };
 
+  // Dropdown-menu con el usuario ya logeado
   const loggedIn = () => {
     return (
       <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
@@ -38,10 +39,11 @@ const UserWidget = () => {
     );
   };
 
+  // Spinner loading para el avatar
   if (loading) {
     return (
-      <div class="spinner-border text-light" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div className="spinner-border text-light" role="status">
+        <span className="visually-hidden">Loading...</span>
       </div>
     );
   }

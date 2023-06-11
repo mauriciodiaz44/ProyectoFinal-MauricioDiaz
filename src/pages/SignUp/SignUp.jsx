@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../components/Button";
 import {
-  HiOutlineUser,
   HiOutlineIdentification,
   HiOutlineLockClosed,
   HiOutlineEnvelope,
@@ -15,8 +14,10 @@ import "../../assets/css/Form.css";
 const SignUp = () => {
   const [PasswordInputType, ToggleIcon] = usePasswordToggle();
   const [user, setUser] = useState({
+    displayName: "",
     email: "",
     password: "",
+    password2: "",
   });
   const { signup } = useAuth();
   const navigate = useNavigate();
@@ -30,10 +31,17 @@ const SignUp = () => {
     e.preventDefault();
     setError("");
     try {
-      await signup(user.email, user.password);
-      navigate("/");
+      if (user.displayName === "") {
+        setError("El nombre es un campo obligatorio.");
+      } else if (/^[a-zA-Z]+ [a-zA-Z]+$/.test(user.displayName)) {
+        setError("El nombre no es valido, debe ingresar nombre y apellido.");
+      } else if (user.password2 !== user.password) {
+        setError("La contraseña de verificación no coincide.");
+      } else {
+        await signup(user.email, user.password);
+        navigate("/");
+      }
     } catch (error) {
-      console.log(error);
       if (error.code === "auth/invalid-email") {
         setError("El email ingresado no es valido.");
       }
@@ -70,29 +78,16 @@ const SignUp = () => {
             </p>
           )}
           <form className="form__signup" onSubmit={handleSubmit}>
-            <div className="form__group-two">
-              <div className="form__group">
-                <input
-                  className="form__input"
-                  type="text"
-                  placeholder="Nombre"
-                  name="firstname"
-                  id="name"
-                  onChange={handleChange}
-                />
-                <HiOutlineUser className="form__input-icon" />
-              </div>
-              <div className="form__group">
-                <input
-                  className="form__input"
-                  type="text"
-                  placeholder="Apellido"
-                  name="lastname"
-                  id="lastname"
-                  onChange={handleChange}
-                />
-                <HiOutlineIdentification className="form__input-icon" />
-              </div>
+            <div className="form__group">
+              <input
+                className="form__input"
+                type="text"
+                placeholder="Nombre y Apellido"
+                name="displayName"
+                id="displayName"
+                onChange={handleChange}
+              />
+              <HiOutlineIdentification className="form__input-icon" />
             </div>
             <div className="form__group">
               <input
@@ -123,7 +118,7 @@ const SignUp = () => {
                 className="form__input"
                 type={PasswordInputType}
                 placeholder="Confirmar Contraseña"
-                name="password"
+                name="password2"
                 id="password2"
                 onChange={handleChange}
               />
