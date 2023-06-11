@@ -1,5 +1,4 @@
 import React from "react";
-import "./Modal.css";
 import styled, { keyframes } from "styled-components";
 import {
   AiFillExclamationCircle,
@@ -15,7 +14,7 @@ const Modal = ({ title, onClose, isOpen, icon, children }) => {
   }
   return (
     <>
-      <Overlay isOpen={isOpen}>
+      <Overlay isOpen={isOpen} onClick={onClose}>
         <ModalWrapper isOpen={isOpen}>
           <ModalHeader>
             {icon && (

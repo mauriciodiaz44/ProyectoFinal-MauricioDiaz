@@ -4,9 +4,9 @@ import ItemList from "../ItemList/ItemList";
 import Aside from "../Aside/Aside";
 import Loading from "../Loading/Loading";
 import BreadCrumbs from "../BreadCrumbs/BreadCrumbs";
-import "./ItemListContainer.css";
 import { fetchAllProducts, fetchCategory } from "../../data/FireStore";
 import Error404 from "../../pages/Error404/Error404";
+import "./ItemListContainer.css";
 
 const ItemListContainer = () => {
   const { categoryid } = useParams();

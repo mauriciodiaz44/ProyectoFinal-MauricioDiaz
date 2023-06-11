@@ -1,0 +1,30 @@
+.accordion-item {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--background);
+  background-color: var(--white);
+  border-radius: var(--radius) !important;
+  box-shadow: var(--boxshadow) !important;
+}
+.accordion-button:focus {
+  z-index: 3;
+  border-color: var(--primary) !important;
+  outline: 0;
+  box-shadow: var(--boxshadow) !important;
+}
+.accordion-button:hover {
+  background-color: var(--background);
+}
+.accordion-button:not(.collapsed) {
+  color: var(--primary) !important;
+  background-color: var(--background) !important;
+  box-shadow: var(--boxshadow);
+}
+
+.help__contact {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--boxshadow);
+  padding: 12px;
+}
