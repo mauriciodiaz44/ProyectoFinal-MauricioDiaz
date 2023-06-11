@@ -6,8 +6,8 @@ import {
   HiOutlineArrowLongLeft,
   HiOutlineBuildingStorefront,
   HiOutlineTruck,
-  HiOutlineShieldCheck,
   HiOutlineInformationCircle,
+  HiOutlineShoppingBag,
 } from "react-icons/hi2";
 import {
   RiFacebookCircleFill,
@@ -122,9 +122,12 @@ const ItemDetail = ({ item }) => {
                   </div>
                 </div>
                 <div className="details__icon">
-                  <HiOutlineShieldCheck />
+                  <HiOutlineShoppingBag />
                   <div className="details__desc">
-                    <p className="details__text">Garantia por 365 dias</p>
+                    <p>
+                      Stock disponible:{" "}
+                      <span className="fw-mbold primary">{item.stock}</span>
+                    </p>
                   </div>
                 </div>
                 <hr />
